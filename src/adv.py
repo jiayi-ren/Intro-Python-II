@@ -1,4 +1,6 @@
+import sys
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -38,6 +40,7 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+player = Player(input("Please enter your name:"), room['outside'])
 
 # Write a loop that:
 #
@@ -49,3 +52,51 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+print("\nWelcome to the adventure")
+print(f"Hey {player.name}, you are {player.current_room}\n")
+
+while True:
+
+
+    player_command = None
+
+    def command():
+        global player_command
+        print("***Enter a command to continue***\
+            \n q: quit\
+            \n n: go North\
+            \n s: go South\
+            \n e: go East\
+            \n w: go West")
+        player_command = input(">> ")
+
+    command()
+
+    if player_command == 'q':
+        print("\nSee you back soon")
+        sys.exit(1)
+
+    elif player_command == 'n':
+        if player.current_room.n_to is not None:
+            player.current_room = player.current_room.n_to
+            print(f"\n{player}\n")
+        else:
+            print(f"Sorry {player.name}, no rooms to enter in the North\n")
+    elif player_command == 's':
+        if player.current_room.s_to is not None:
+            player.current_room = player.current_room.s_to
+            print(f"\n{player}\n")
+        else:
+            print(f"Sorry {player.name}, no rooms to enter in the South\n")
+    elif player_command == 'w':
+        if player.current_room.w_to is not None:
+            player.current_room = player.current_room.w_to
+            print(f"\n{player}\n")
+        else:
+            print(f"Sorry {player.name}, no rooms to enter in the West\n")
+    elif player_command == 'e':
+        if player.current_room.e_to is not None:
+            player.current_room = player.current_room.e_to
+            print(f"\n{player}\n")
+        else:
+            print(f"Sorry {player.name}, no rooms to enter in the East\n")
