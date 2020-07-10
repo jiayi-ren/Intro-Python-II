@@ -3,15 +3,21 @@
 
 
 class Room:
-    def __init__(self, name, description):
-        super().__init__()
+    def __init__(self, name, description, inventory):
         self.name = name
         self.description = description
-        self.n_to = None
-        self.s_to = None
-        self.e_to = None
-        self.w_to = None
-        self.items = []
+        self.inventory = inventory
 
     def __str__(self):
-        return f"Room : {self.name}\n{self.description}"
+        return f"{self.name}\n{self.description}\n\n{self.print_inventory()}"
+
+    def print_inventory(self):
+
+        inventory = ""
+        for item in self.inventory:
+            inventory += f"{item.name}: {item.description}\n"
+
+        if self.inventory == []:
+            return f"There is nothing here."
+        else:
+            return f"Around you, you see:\n{inventory}"
