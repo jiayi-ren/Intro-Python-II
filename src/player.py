@@ -41,13 +41,9 @@ class Player:
             print(f"Wake up adventurer, you don't have such item")
 
     def show_items(self):
-        message = ""
-        for item in self.items:
-            message += f"{item.name},"
-        if len(self.items) > 1:
-            message = message[:-1]
-
-        if self.items == "":
-            print("You don't have anything")
+        print("You have:")
+        if len(self.items) > 0:
+            for i in self.items:
+                print(f"{i.name}") 
         else:
-            print(f"You have: {message}")
+            print("Nothing")

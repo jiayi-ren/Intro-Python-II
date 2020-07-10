@@ -64,17 +64,9 @@ player = Player(input("Please enter your name:"), room['outside'])
 #
 # If the user enters "q", quit the game.
 
-
-show_special = False
-
 player_command = None
 
 while True:
-
-    if show_special is True:
-        print(f"{player.show_items()}")
-    else:
-        pass
 
     print(f"Your location: {player.current_room}\n")
 
@@ -96,18 +88,18 @@ while True:
     if player_command == 'q':
         print("See you back soon")
         sys.exit(1)
-    elif player_command == 'i':
-        show_special = True
-    elif player_command[0] == 'g':
-        show_special = False
-        player.get_item(player_command[2:].lower())
-    elif player_command[0] == 'd':
-        show_special = False
-        player.drop_item(player_command[2:].lower())
-    elif player_command in possible_directions:
-        show_special = False
-        player.try_direction(player_command)
-    else:
-        show_special = False
-        print("I don't understand your command. Try again\n")
 
+    elif player_command == 'i':
+        player.show_items()
+
+    elif player_command[0] == 'g':
+        player.get_item(player_command[2:].lower())
+
+    elif player_command[0] == 'd':
+        player.drop_item(player_command[2:].lower())
+        
+    elif player_command in possible_directions:
+        player.try_direction(player_command)
+        
+    else:
+        print("I don't understand your command. Try again\n")
